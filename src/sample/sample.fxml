@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane prefHeight="819.0" prefWidth="1324.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+   <center>
+      <Pane prefHeight="824.0" prefWidth="1082.0" BorderPane.alignment="CENTER">
+         <children>
+            <Line endX="50.0" layoutX="372.0" layoutY="537.0" startX="-100.0" startY="-100.0" />
+            <Circle fx:id="cercle_ext" fill="#e7f4ff" layoutX="230.0" layoutY="252.0" radius="216.0" stroke="BLACK" strokeDashOffset="20.0" strokeType="INSIDE" />
+            <Line endX="100.0" layoutX="129.0" layoutY="444.0" startX="-50.0" startY="100.0" />
+            <Circle fx:id="cercle_int" fill="#c9dcee" layoutX="230.0" layoutY="252.0" radius="210.0" stroke="BLACK" strokeType="INSIDE" />
+            <SVGPath fx:id="seau_svgpath" content="M 159.60352 240.19922 L 159.60352 255.21875 L 77.142578 255.21875 L 77.142578 683.79102 L 522.85742 683.79102 L 522.85742 255.21875 L 427.28516 255.21875 L 427.28516 240.5 L 384.85742 240.5 L 384.85742 255.21875 L 202.03125 255.21875 L 202.03125 240.19922 L 159.60352 240.19922 z" fill="#9cb9d0" layoutX="488.0" layoutY="-110.0" stroke="BLACK" />
+            <Line endX="330.0" layoutX="470.0" layoutY="360.0" rotate="90.0" startX="-100.0" />
+            <Line endX="330.0" layoutX="880.0" layoutY="360.0" rotate="90.0" startX="-100.0" />
+            <Label fx:id="label_int" layoutX="42.0" layoutY="553.0" text="Label" />
+            <Label fx:id="label_ext" layoutX="428.0" layoutY="546.0" text="Label" />
+            <Line endX="10.0" layoutX="230.0" layoutY="252.0" startX="-10.0" />
+            <Line endY="10.0" layoutX="230.0" layoutY="252.0" startY="-10.0" />
+         </children>
+         <BorderPane.margin>
+            <Insets left="20.0" />
+         </BorderPane.margin>
+      </Pane>
+   </center>
+   <top>
+      <HBox prefHeight="73.0" prefWidth="1304.0" spacing="20.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox prefHeight="40.0" prefWidth="153.0">
+               <children>
+                  <Label prefHeight="45.0" prefWidth="155.0" text="Sélectionner un diamètre" textAlignment="CENTER" wrapText="true" />
+                  <ComboBox fx:id="diametre_combobox" editable="true" prefWidth="150.0" />
+               </children>
+            </VBox>
+            <VBox prefHeight="73.0" prefWidth="155.0">
+               <children>
+                  <Label prefHeight="45.0" prefWidth="155.0" text="Sélectionner une largeur de bord" textAlignment="CENTER" wrapText="true" />
+                  <ComboBox fx:id="bordure_combobox" editable="true" prefWidth="150.0" />
+               </children>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="155.0">
+               <children>
+                  <Label prefHeight="45.0" text="Sélectionner une hauteur" textAlignment="CENTER" wrapText="true" />
+                  <ComboBox fx:id="hauteur_combobox" editable="true" prefWidth="150.0" />
+               </children>
+               <HBox.margin>
+                  <Insets left="300.0" />
+               </HBox.margin>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="155.0">
+               <children>
+                  <Label prefHeight="45.0" text="Sélectionner une largeur de bandoulière" textAlignment="CENTER" wrapText="true" />
+                  <ComboBox fx:id="largeur_bandouliere_combobox" editable="true" prefWidth="150.0" />
+               </children>
+            </VBox>
+         </children>
+         <BorderPane.margin>
+            <Insets left="20.0" top="10.0" />
+         </BorderPane.margin>
+      </HBox>
+   </top>
+</BorderPane>
