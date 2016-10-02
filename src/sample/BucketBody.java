@@ -1,15 +1,17 @@
 package sample;
 
-public class BucketBody {
+import javafx.scene.shape.SVGPath;
+
+public class BucketBody{
 
     private int y_top;
     private int y_bottom;
     private int x_left;
     private double x_right;
     private int largeur_bandouliere;
-    private Float marge;
+    private float marge;
 
-    public BucketBody(int x_left, double x_right, int y_top, int y_bottom, int largeur_b, Float marge) {
+    public BucketBody(int x_left, double x_right, int y_top, int y_bottom, int largeur_b, float marge) {
         this.y_top = y_top;
         this.y_bottom = y_bottom;
         this.x_left = x_left;

@@ -8,14 +8,20 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Line;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.SVGPath;
+import javafx.scene.layout.Pane;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable{
+
+    @FXML
+    private Pane dessin_pane;
 
     @FXML
     private Circle cercle_int;
@@ -26,6 +32,11 @@ public class Controller implements Initializable{
     private Circle cercle_ext;
     @FXML
     private Label label_ext;
+
+    @FXML
+    private Label largeur_bucket;
+    @FXML
+    private Label largeur_bucket_decoupe;
 
     @FXML
     private ComboBox<Float> diametre_combobox;
@@ -39,7 +50,6 @@ public class Controller implements Initializable{
     @FXML
     private SVGPath seau_svgpath;
 
-
     private ObservableList<Float> tailles;
     private ObservableList<Integer> bordures;
     private ObservableList<Integer> hauteurs;
@@ -51,6 +61,12 @@ public class Controller implements Initializable{
     private float bordure;
     private int hauteur;
     private int largeur_bretelle;
+
+    private Line axisBretelleLeft;
+    private Line axisBretelleRight;
+    private Line axis_x;
+
+    private Rectangle bucket_decoupe;
 
     @Override
     public void initialize(URL u, ResourceBundle rb){
@@ -75,8 +91,6 @@ public class Controller implements Initializable{
         largeurs_bandouliere.addAll(5, 6, 7, 8, 9, 10);
         largeur_bandouliere_combobox.setItems(largeurs_bandouliere);
         largeur_bandouliere_combobox.getSelectionModel().select(1);
-
-        redraw();
 
         diametre_combobox.setOnAction(a -> redraw());
         bordure_combobox.setOnAction(a -> redraw());
@@ -133,19 +147,61 @@ public class Controller implements Initializable{
             }
         });
 
+        axis_x = new Line();
+        axisBretelleLeft = new Line();
+        axisBretelleRight = new Line();
+        bucket_decoupe = new Rectangle();
+
+        dessin_pane.getChildren().addAll(bucket_decoupe, axis_x, axisBretelleLeft, axisBretelleRight);
+
         redraw();
     }
 
     public void redraw(){
 
         cercle_int.setRadius(rayon * 20);
-        cercle_ext.setRadius(rayon * 20 + bordure * 2);
+        cercle_ext.setRadius(rayon * 20 + bordure);
 
         label_int.setText(String.format("diamètre : %2.2f cm\nrayon : %2.2f cm", rayon * 2, rayon));
         label_ext.setText(String.format("diamètre : %2.2f cm\nrayon : %2.2f cm", rayon * 2 + bordure * 2 / 10, rayon + bordure / 10));
 
-        bucket = new BucketBody(77, 77 + 2 * Math.PI * rayon * 10, 255, 255 + hauteur * 2, largeur_bretelle, bordure);
+        bucket = new BucketBody(77, 77 + 2 * Math.PI * rayon * 20, 255, 255 + hauteur * 2, largeur_bretelle, bordure);
         seau_svgpath.setContent(bucket.toString());
+
+        bucket_decoupe.setSmooth(true);
+        bucket_decoupe.setStroke(Color.BLACK);
+        bucket_decoupe.setStrokeWidth(1);
+        bucket_decoupe.setStyle("-fx-stroke-dash-array: 12 12 12 12;");
+        bucket_decoupe.setFill(Color.valueOf("c9dcee"));
+        bucket_decoupe.setHeight(hauteur * 2);
+        bucket_decoupe.setWidth(2 * Math.PI * rayon * 20 + bordure * 2);
+        bucket_decoupe.setLayoutX(77 + seau_svgpath.getLayoutX() - bordure);
+        bucket_decoupe.setLayoutY(255 + seau_svgpath.getLayoutY());
+        bucket_decoupe.toBack();
+
+        largeur_bucket.setText(String.format("largeur avant marge\n= %.2f cm", 2 * Math.PI * rayon));
+        largeur_bucket_decoupe.setText(String.format("largeur avec marge\n= %.2f cm", 2 * Math.PI * rayon + 2 * bordure / 10));
+
+        axis_x.setStartX(seau_svgpath.getLayoutX() + bucket.getAxis_x());
+        axis_x.setEndX(seau_svgpath.getLayoutX() + bucket.getAxis_x());
+        axis_x.setStartY(seau_svgpath.getLayoutY() + 255);
+        axis_x.setEndY(seau_svgpath.getLayoutY() + 255 + hauteur * 2);
+        axis_x.setSmooth(true);
+        axis_x.setStyle("-fx-stroke-dash-array: 12 12 12 12;");
+
+        axisBretelleLeft.setStartX(seau_svgpath.getLayoutX() + bucket.getAxisBandouliereLeft());
+        axisBretelleLeft.setEndX(seau_svgpath.getLayoutX() + bucket.getAxisBandouliereLeft());
+        axisBretelleLeft.setStartY(seau_svgpath.getLayoutY() + 205);
+        axisBretelleLeft.setEndY(seau_svgpath.getLayoutY() + 255 + hauteur * 2);
+        axisBretelleLeft.setSmooth(true);
+        axisBretelleLeft.setStyle("-fx-stroke-dash-array: 12 12 12 12;");
+
+        axisBretelleRight.setStartX(seau_svgpath.getLayoutX() + bucket.getAxisBandouliereRight());
+        axisBretelleRight.setEndX(seau_svgpath.getLayoutX() + bucket.getAxisBandouliereRight());
+        axisBretelleRight.setStartY(seau_svgpath.getLayoutY() + 205);
+        axisBretelleRight.setEndY(seau_svgpath.getLayoutY() + 255 + hauteur * 2);
+        axisBretelleRight.setSmooth(true);
+        axisBretelleRight.setStyle("-fx-stroke-dash-array: 12 12 12 12;");
     }
 
 }
