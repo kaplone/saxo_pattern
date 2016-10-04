@@ -1,17 +1,15 @@
 package sample;
 
-import javafx.scene.shape.SVGPath;
-
 public class BucketBody{
 
     private int y_top;
     private int y_bottom;
     private int x_left;
     private double x_right;
-    private int largeur_bandouliere;
+    private float largeur_bandouliere;
     private float marge;
 
-    public BucketBody(int x_left, double x_right, int y_top, int y_bottom, int largeur_b, float marge) {
+    public BucketBody(int x_left, double x_right, int y_top, int y_bottom, float largeur_b, float marge) {
         this.y_top = y_top;
         this.y_bottom = y_bottom;
         this.x_left = x_left;
@@ -53,6 +51,10 @@ public class BucketBody{
         return getAxis_x() + (x_right - getAxis_x()) / 2;
     }
 
+    public double getAbsoluteAxis_x() { return (x_right - x_left) / 4; }
+
+    public double getAbsoluteAxisBandouliereLeft(){ return getAbsoluteAxis_x() / 2; }
+
     public double getY_top() {
         return y_top;
     }
@@ -85,14 +87,13 @@ public class BucketBody{
         this.x_right = x_right;
     }
 
-    public int getLargeur_bandouliere() {
+    public float getLargeur_bandouliere() {
         return largeur_bandouliere;
     }
 
-    public void setLargeur_bandouliere(int largeur_bandouliere) {
+    public void setLargeur_bandouliere(float largeur_bandouliere) {
         this.largeur_bandouliere = largeur_bandouliere;
     }
-
 
     public Float getMarge() {
         return marge;

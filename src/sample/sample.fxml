@@ -25,6 +25,8 @@
             <Line endY="10.0" layoutX="230.0" layoutY="252.0" startY="-10.0" />
             <Label fx:id="largeur_bucket" layoutX="603.0" layoutY="683.0" text="Label" />
             <Label fx:id="largeur_bucket_decoupe" layoutX="1148.0" layoutY="683.0" text="Label" />
+            <Label fx:id="angle1_label" layoutX="689.0" layoutY="169.0" text="Label" />
+            <Label fx:id="angle2_label" layoutX="866.0" layoutY="169.0" text="Label" />
          </children>
          <BorderPane.margin>
             <Insets left="20.0" />

@@ -50,6 +50,12 @@ public class Controller implements Initializable{
     @FXML
     private SVGPath seau_svgpath;
 
+    @FXML
+    private Label angle1_label;
+
+    @FXML
+    private Label angle2_label;
+
     private ObservableList<Float> tailles;
     private ObservableList<Integer> bordures;
     private ObservableList<Integer> hauteurs;
@@ -60,7 +66,7 @@ public class Controller implements Initializable{
     private float rayon;
     private float bordure;
     private int hauteur;
-    private int largeur_bretelle;
+    private float largeur_bretelle;
 
     private Line axisBretelleLeft;
     private Line axisBretelleRight;
@@ -140,7 +146,7 @@ public class Controller implements Initializable{
                 System.out.println(newValue);
 
                 if (! "".equals(newValue)){
-                    largeur_bretelle = Integer.parseInt(newValue) * 10;
+                    largeur_bretelle = Float.parseFloat(newValue) * 10;
                     redraw();
                 }
 
@@ -154,7 +160,7 @@ public class Controller implements Initializable{
 
         dessin_pane.getChildren().addAll(bucket_decoupe, axis_x, axisBretelleLeft, axisBretelleRight);
 
-        redraw();
+        //redraw();
     }
 
     public void redraw(){
@@ -202,6 +208,9 @@ public class Controller implements Initializable{
         axisBretelleRight.setEndY(seau_svgpath.getLayoutY() + 255 + hauteur * 2);
         axisBretelleRight.setSmooth(true);
         axisBretelleRight.setStyle("-fx-stroke-dash-array: 12 12 12 12;");
+
+        angle1_label.setText(String.format("%.2f cm" , (bucket.getAbsoluteAxisBandouliereLeft() - largeur_bretelle / 2 + bordure) / 10));
+        angle2_label.setText(String.format("%.2f cm" , (bucket.getAbsoluteAxisBandouliereLeft() + largeur_bretelle / 2 + bordure) / 10));
     }
 
 }

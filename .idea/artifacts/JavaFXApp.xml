@@ -1,15 +1,28 @@
 <component name="ArtifactManager">
-  <artifact type="javafx" name="JavaFXApp">
+  <artifact type="javafx" build-on-make="true" name="JavaFXApp">
     <output-path>$PROJECT_DIR$/out/artifacts/JavaFXApp</output-path>
     <properties id="javafx-properties">
       <options>
         <option name="appClass" value="sample.Main" />
+        <option name="description" value="" />
+        <option name="height" value="900" />
+        <option name="htmlPlaceholderId" value="" />
+        <option name="title" value="Saxo_pattern" />
+        <option name="vendor" value="" />
+        <option name="version" value="01" />
+        <option name="width" value="1920" />
       </options>
     </properties>
     <root id="root">
       <element id="archive" name="JavaFXApp.jar">
         <element id="module-output" name="saxo_pattern" />
+        <element id="archive" name="archive.jar">
+          <element id="directory" name="META-INF">
+            <element id="file-copy" path="$PROJECT_DIR$/META-INF/MANIFEST.MF" />
+          </element>
+        </element>
       </element>
+      <element id="module-output" name="IntelliJ_projects" />
     </root>
   </artifact>
 </component>
